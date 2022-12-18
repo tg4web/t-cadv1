@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#061826",
+        secondary: "#89AAE6",
+        textField: "#D9D9D9",
+        cardBackground: "#CCCCCC",
+        selected: "#C7C7C7",
+      },
+    },
   },
   plugins: [],
 };
