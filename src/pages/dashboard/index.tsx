@@ -1,13 +1,28 @@
-import {signOut, useSession, getSession } from "next-auth/react"
+import { signOut, useSession, getSession } from "next-auth/react";
 import { requireAuth } from "../../utils/requireAuth";
 import type { NextPage } from "next";
 import type { Session } from "next-auth";
 import type { Context } from "../../server/trpc/context";
 import Card from "../../components/Card";
 import Menu from "../../components/Menu";
-import Link from "next/link";
+import useGetCurrentUser from "../../utils/useGetCurrentUser";
+import alert from "../../utils/alert";
 
 const DashboardSelect: NextPage = () => {
+  const user = useGetCurrentUser();
+  if (user) {
+    const accepted = user.accepted;
+
+    if (!accepted) {
+      alert(
+        "You have not been accepted to the server yet. Please wait for an admin to accept you.",
+        { toastId: "notAccepted" }
+      );
+      setTimeout(() => {
+        signOut();
+      }, 6000);
+    }
+  }
 
   return (
     <div className="flex h-screen w-full bg-primary">
@@ -38,15 +53,14 @@ const DashboardSelect: NextPage = () => {
       </div>
     </div>
   );
-
-}
+};
 
 export async function getServerSideProps(context: Context) {
-  return requireAuth(context, ( session : Session) => {
+  return requireAuth(context, (session: Session) => {
     return {
-      props: { session }
-    }
+      props: { session },
+    };
   });
 }
 
-export default DashboardSelect
+export default DashboardSelect;

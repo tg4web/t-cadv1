@@ -6,17 +6,22 @@ import { trpc } from "../utils/trpc";
 
 import "../styles/globals.css";
 import { Container } from "../components/Container";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <Container>
-        <Component {...pageProps} />
-      </Container>
-    </SessionProvider>
+    <>
+      <SessionProvider session={session}>
+        <Container>
+          <Component {...pageProps} />
+        </Container>
+        <ToastContainer />
+      </SessionProvider>
+    </>
   );
 };
 

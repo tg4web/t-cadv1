@@ -9,6 +9,7 @@ module.exports = {
         textField: "#D9D9D9",
         cardBackground: "#CCCCCC",
         selected: "#C7C7C7",
+        border: "#A4A4A4",
       },
     },
   },

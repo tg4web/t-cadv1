@@ -49,6 +49,8 @@ model User {
   username          String? @unique
   password          String? // @db.Text
   image         String?
+  role          String?
+  accepted     Boolean?  @default(false)
   accounts      Account[]
   sessions      Session[]
 }
